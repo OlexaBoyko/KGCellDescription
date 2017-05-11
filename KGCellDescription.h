@@ -1,6 +1,6 @@
 //
 //  KGCellDescription.h
-//  Boating
+//  
 //
 //  Created by Olexa Boyko on 5/10/17.
 //  Copyright © 2017 Olexa Boyko. All rights reserved.

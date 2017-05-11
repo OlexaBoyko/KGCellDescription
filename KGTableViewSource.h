@@ -1,6 +1,6 @@
 //
 //  KGTableViewSource.h
-//  Boating
+//  
 //
 //  Created by Olexa Boyko on 5/11/17.
 //  Copyright © 2017 Olexa Boyko. All rights reserved.
