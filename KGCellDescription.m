@@ -11,7 +11,6 @@
 @implementation KGCellDescription
 
 CDSelectionType _selectionType = CDSelectionTypeNone;
-CGFloat _height = 44.0;
 
 + (NSString*) nibName {
     [NSException raise:@"Override nibName!" format:@"Override nibName!"];
@@ -32,12 +31,13 @@ CGFloat _height = 44.0;
     self = [super init];
     if (self) {
         _selectionType = selectionType;
+        _height = 44.0;
     }
     return self;
 }
 
 + (void)registerCellFor:(UITableView*)tableView {
-    [tableView registerNib:[[UINib alloc] init] forCellReuseIdentifier:[self reuseIdentifier]];
+    [tableView registerNib:[UINib nibWithNibName:[self nibName] bundle:nil] forCellReuseIdentifier:[self reuseIdentifier]];
 }
 
 - (void)setUpCell:(UITableViewCell* )cell {}

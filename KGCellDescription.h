@@ -20,7 +20,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) CDSelectionType selectionType;
 @property (class, nonatomic, readonly) NSString *nibName;
 @property (class, nonatomic, readonly) NSString *reuseIdentifier;
-@property (nonatomic, readonly) CGFloat height;
+@property (nonatomic) CGFloat height;
 
 + (void)registerCellFor:(UITableView*)tableView;
 - (void)setUpCell:(UITableViewCell*)cell;

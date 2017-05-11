@@ -10,19 +10,35 @@
 
 @interface KGTableViewSource()
 
-@property (strong, atomic) NSArray<NSArray<KGCellDescription*>*>* cellDescriptionArray;
+@property (strong, atomic) NSMutableArray<NSArray<KGCellDescription*>*>* cellDescriptionArray;
 
 
 @end
 
 @implementation KGTableViewSource
 
--(void)clearTable {
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _cellDescriptionArray = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+-(void)setTableView:(UITableView *)tableView {
+    _tableView = tableView;
+    _tableView.dataSource = self;
+    [self registerCells];
     
 }
 
+-(void)clearTable {
+    _cellDescriptionArray = [[NSMutableArray alloc] init];
+}
+
 -(void)addSectionWithCellDescriptionsArray:(NSArray<KGCellDescription*>*)cellDescriptionsArray {
-    
+    [_cellDescriptionArray addObject:cellDescriptionsArray];
 }
 
 -(NSIndexPath*)indexPathForCellDescription:(KGCellDescription*)cell {
@@ -48,11 +64,25 @@
 }
 
 -(void)registerCells {
+    if (!_tableView)
+    {
+        return;
+    }
     
+    NSMutableSet<NSString *> *set = [[NSMutableSet<NSString *> alloc] init];
+    
+    for (NSArray<KGCellDescription *> *section in _cellDescriptionArray) {
+        for (KGCellDescription* row in section) {
+            if(![set containsObject:[[row class] reuseIdentifier]]) {
+                [[row class] registerCellFor:_tableView];
+                [set addObject:[[row class] reuseIdentifier]];
+            }
+        }
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger count = [self.cellDescriptionArray[section] count];
+    NSInteger count = [_cellDescriptionArray[section] count];
     if (count) {
         return count;
     }
@@ -62,12 +92,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self.cellDescriptionArray[indexPath.section][indexPath.row] instantiateCellForTableView:tableView];
+    return [_cellDescriptionArray[indexPath.section][indexPath.row] instantiateCellForTableView:tableView];
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count = [self.cellDescriptionArray count];
+    NSInteger count = [_cellDescriptionArray count];
     
     if (count) {
         return count;
