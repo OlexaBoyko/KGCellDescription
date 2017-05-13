@@ -10,8 +10,8 @@ import UIKit
 
 class KGCD___FILEBASENAMEASIDENTIFIER___: KGCellDescription {
 
-    override class var nibName:         String  {return "___FILEBASENAMEASIDENTIFIER___"}
-    override class var reuseIdentifier: String  {return "___FILEBASENAMEASIDENTIFIER___"}
+    override class var nibName:         String  {return "___FILEBASENAMEASIDENTIFIER___Cell"}
+    override class var reuseIdentifier: String  {return "___FILEBASENAMEASIDENTIFIER___Cell"}
     override       var height:          CGFloat {return 44.0}
     
     public init(selectionType: KGCellSelectionType) {
