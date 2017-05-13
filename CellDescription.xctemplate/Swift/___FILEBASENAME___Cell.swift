@@ -14,8 +14,8 @@ class KGCD___FILEBASENAMEASIDENTIFIER___: KGCellDescription {
     override class var reuseIdentifier: String  {return "___FILEBASENAMEASIDENTIFIER___Cell"}
     override       var height:          CGFloat {return 44.0}
     
-    public init(selectionType: KGCellSelectionType) {
-        super.init(selectionType: .selectionType)
+    public override init(selectionType: KGCellSelectionType) {
+        super.init(selectionType: selectionType)
     }
     
     override func setUpCell(_ cell: UITableViewCell) {
