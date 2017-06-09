@@ -118,6 +118,26 @@ class KGTableViewSource: NSObject {
         
         self.tableView?.reloadData()
     }
+    
+    public subscript(index: Int) -> [KGCellDescription] {
+        get {
+            return self.cellDescriptionArray[index]
+        }
+        
+        set(value) {
+            self.cellDescriptionArray[index] = value
+        }
+    }
+    
+    public subscript(indexPath: IndexPath) -> KGCellDescription {
+        get {
+            return self.cellDescription(at: indexPath)
+        }
+        
+        set(value) {
+            self.cellDescriptionArray[indexPath.section][indexPath.row] = value
+        }
+    }
 }
 
 extension KGTableViewSource: KGCellReloader {
